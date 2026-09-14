@@ -51,6 +51,14 @@ try {
             color: #000;
             font-weight: 600;
         }
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('gorras.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 90px 0;
+            border-bottom: 5px solid var(--primary-color);
+        }
     </style>
 </head>
 <body>
@@ -58,7 +66,8 @@ try {
     <!-- Barra de Navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold fs-4" href="#">🛒 Nerco Shop</a>
+            <a class="navbar-brand fw-bold fs-4" href="#">
+    <img src="logo.jpg" alt="Logo" style="height: 40px; width: 40px; objet-fit: cover; border-radius: 50%;"> Nerco Shop</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -123,11 +132,11 @@ try {
                         </div>
                         <div class="card-body d-flex flex-column">
                             <span class="badge bg-primary mb-2 align-self-start">DTF Activo</span>
-                            <h5 class="card-title fw-bold">Franela Personalizada</h5>
+                            <h5 class="card-title fw-bold">Franela 70% Algodón</h5>
                             <p class="card-text text-muted small">Estampado DTF de alta definición, tacto suave y máxima durabilidad ante los lavados.</p>
                             <div class="mt-auto">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="fs-4 fw-bold text-success">$15.00</span>
+                                    <span class="fs-4 fw-bold text-success">$5.00</span>
                                     <span class="badge bg-success">Disponible</span>
                                 </div>
                                 <button class="btn btn-dark w-100 fw-bold" style="background-color: #ff5722; border: none;">Pedir por Pedido</button>
@@ -136,18 +145,77 @@ try {
                     </div>
                 </div>
 
+                
                 <div class="col">
                     <div class="card card-producto h-100 shadow-sm">
-                        <div class="bg-dark text-white d-flex align-items-center justify-content-center" style="height: 220px;">
-                            <span class="text-warning fw-bold">Gorra Trucker</span>
+                        <div style="height: 220px; overflow: hidden; background-color: #000;">
+                          <img src="gorras.jpeg" alt="Gorras Trucker" style="width: 100%; height: 100%; object-fit: cover;">
+                      </div>
+                        
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-primary mb-2 align-self-start">DTF Activo</span>
+                            <h5 class="card-title fw-bold">Estructura alta</h5>
+                            <p class="card-text text-muted small">Ideales para marcas, eventos o uso personal. Estampado frontal vibrante.</p>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="fs-4 fw-bold text-success">$5.00</span>
+                                    <span class="badge bg-success">Disponible</span>
+                                </div>
+                                <button class="btn btn-dark w-100 fw-bold" style="background-color: #ff5722; border: none;">Pedir por Pedido</button>
+                            </div>
                         </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card card-producto h-100 shadow-sm">
+                         <div style="height: 220px; overflow: hidden; background-color: #000;">
+                          <img src="trucker.jpeg" alt="Gorras Trucker" style="width: 100%; height: 100%; object-fit: cover;">
+                      </div>
                         <div class="card-body d-flex flex-column">
                             <span class="badge bg-primary mb-2 align-self-start">DTF Activo</span>
                             <h5 class="card-title fw-bold">Gorras Trucker Frontal</h5>
                             <p class="card-text text-muted small">Ideales para marcas, eventos o uso personal. Estampado frontal vibrante.</p>
                             <div class="mt-auto">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="fs-4 fw-bold text-success">$10.00</span>
+                                    <span class="fs-4 fw-bold text-success">$5.00</span>
+                                    <span class="badge bg-success">Disponible</span>
+                                </div>
+                                <button class="btn btn-dark w-100 fw-bold" style="background-color: #ff5722; border: none;">Pedir por Pedido</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card card-producto h-100 shadow-sm">
+                        <div class="bg-dark text-white d-flex align-items-center justify-content-center" style="height: 220px;">
+                            <span class="text-warning fw-bold">Franela Microdurazno</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-primary mb-2 align-self-start">DTF Activo</span>
+                            <h5 class="card-title fw-bold">Franelas Micro-durazno</h5>
+                            <p class="card-text text-muted small">Ideales para marcas, eventos o uso personal. Estampado frontal vibrante.</p>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="fs-4 fw-bold text-success">$5.00</span>
+                                    <span class="badge bg-success">Disponible</span>
+                                </div>
+                                <button class="btn btn-dark w-100 fw-bold" style="background-color: #ff5722; border: none;">Pedir por Pedido</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card card-producto h-100 shadow-sm">
+                        <div class="bg-dark text-white d-flex align-items-center justify-content-center" style="height: 220px;">
+                            <span class="text-warning fw-bold">Franelas de Muselina</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-primary mb-2 align-self-start">DTF Activo</span>
+                            <h5 class="card-title fw-bold">Franelas de Muselina</h5>
+                            <p class="card-text text-muted small">Ideales para marcas, eventos o uso personal. Estampado frontal vibrante.</p>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="fs-4 fw-bold text-success">$5.00</span>
                                     <span class="badge bg-success">Disponible</span>
                                 </div>
                                 <button class="btn btn-dark w-100 fw-bold" style="background-color: #ff5722; border: none;">Pedir por Pedido</button>
