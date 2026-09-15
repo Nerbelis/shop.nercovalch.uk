@@ -255,6 +255,76 @@ try {
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://shop.nercovalch.uk" alt="QR Código Tienda Nerco Shop" class="img-thumbnail shadow-sm" style="width: 150px; height: 150px;">
     </div>
 </section>
+<!-- Sección de Pago Móvil Local (Venezuela) con múltiples bancos -->
+<div class="col-md-6">
+    <div class="card shadow-sm p-4 h-100 bg-white text-dark">
+        <h4 class="text-primary mb-3">💳 Pago Móvil (Maracaibo)</h4>
+        <p class="text-muted small mb-3">Selecciona el banco de tu preferencia para realizar el Pago Móvil:</p>
+        
+        <!-- Lista de Bancos Disponibles -->
+        <div class="mb-3">
+            <label for="bancoSelect" class="form-label fw-bold small">Banco Destino:</label>
+            <select id="bancoSelect" class="form-select form-select-sm mb-2">
+                <option value="mercantil">Mercantil (0105)</option>
+                <option value="bfc">BFC - Fondo Común (0151)</option>
+                <option value="bnc">BNC Nacional de Crédito (0191)</option>
+                <option value="venezuela">Banco de Venezuela (0102)</option>
+                <option value="bancaribe">Bancaribe (0114)</option>
+                <option value="banesco">Banesco (0134)</option>
+            </select>
+        </div>
+
+        <div class="bg-light p-3 rounded mb-3 small">
+            <p class="mb-1"><strong>Teléfono:</strong> 0424-6163113</p>
+            <p class="mb-0"><strong>Cédula / RIF:</strong> V-11282487</p>
+        </div>
+        
+        <hr>
+        <h5 class="text-center mb-3 fs-6">Escanea el QR para tu Pago Móvil</h5>
+        <div class="text-center mb-3">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150&data=P2P|0424-6163113|V11282487|10.00" alt="QR Pago Móvil" class="img-thumbnail" style="width: 150px; height: 150px;">
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label fw-bold small">Número de Referencia:</label>
+            <input type="text" name="referencia_pago" class="form-control form-control-sm" placeholder="Últimos dígitos del pago">
+            <small class="text-muted">Válido para delivery al día siguiente en Maracaibo.</small>
+        </div>
+    </div>
+</div>
+<!-- 2. Método de Pago Internacional (PayPal) -->
+<div class="col-md-6">
+    <div class="card shadow-sm p-4 h-100 bg-white text-dark">
+        <h4 class="text-success mb-3">🌍 Pago Internacional (PayPal)</h4>
+        <p class="text-muted small mb-4">Paga de forma rápida y segura con tu saldo de PayPal o tarjeta de crédito internacional.</p>
+        
+        <!-- Contenedor del Botón de PayPal -->
+        <div id="paypal-button-container" class="mt-auto"></div>
+    </div>
+</div>
+
+<!-- SDK Oficial de PayPal con tu Client ID completo y limpio -->
+
+
+<script src="https://www.paypal.com/sdk/js?client-id=AVENvr04fvsjtCX1m9875602y2DPDMokkTrVg5yVprbUpPhrrKzozW-ekQfn_prPKCTInrZMP_cZm&currency=USD"></script>
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '10.00' // Monto de referencia
+                    }
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(orderData) {
+                alert('¡Pago exitoso con PayPal! Gracias por tu compra en Nerco Shop.');
+            });
+        },
+        onCancel: function (data) {
+            alert('Has cancelado el pago.');
+        }
+    }).render('#paypal-button-container');
+</script>
 
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-4 mt-5">
