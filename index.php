@@ -246,6 +246,15 @@ try {
             <?php endif; ?>
         </div>
     </main>
+    <!-- Sección de Código QR -->
+<section class="text-center py-4 bg-white text-dark my-4 rounded shadow-sm">
+    <div class="container">
+        <h4 class="fw-bold mb-3">¡Escanea y lleva nuestra tienda contigo!</h4>
+        <p class="text-muted small mb-3">Comparte nuestro código QR para acceder rápidamente al catálogo desde cualquier dispositivo móvil.</p>
+        <!-- Generador de QR dinámico (puedes cambiar el enlace si lo deseas) -->
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://shop.nercovalch.uk" alt="QR Código Tienda Nerco Shop" class="img-thumbnail shadow-sm" style="width: 150px; height: 150px;">
+    </div>
+</section>
 
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-4 mt-5">
@@ -257,5 +266,23 @@ try {
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+ 
+    <!-- Script para proteger el código fuente y evitar clic derecho -->
+<script>
+    // Desactivar clic derecho
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // Desactivar atajos de teclado comunes para inspeccionar (F12, Ctrl+U, Ctrl+Shift+I, etc.)
+    document.addEventListener('keydown', function(event) {
+        if (event.keyCode == 123 // F12
+            || (event.ctrlKey && event.shiftKey && event.keyCode == 73) // Ctrl+Shift+I
+            || (event.ctrlKey && event.shiftKey && event.keyCode == 74) // Ctrl+Shift+J
+            || (event.ctrlKey && event.keyCode == 85)) { // Ctrl+U
+            event.preventDefault();
+            return false;
+        }
+    });
+</script>
+
 </body>
 </html>
