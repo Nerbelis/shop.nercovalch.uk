@@ -276,7 +276,7 @@ try {
 
         <div class="bg-light p-3 rounded mb-3 small">
             <p class="mb-1"><strong>Teléfono:</strong> 0424-6163113</p>
-            <p class="mb-0"><strong>Cédula / RIF:</strong> V-11282487</p>
+            <p class="mb-0"><strong>Cédula:</strong> V-11282487</p>
         </div>
         
         <hr>
