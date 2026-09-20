@@ -293,24 +293,16 @@ try {
     </div>
 </div>
 <!-- 2. Método de Pago Internacional (PayPal) -->
-<div class="col-md-6">
-    <div class="card shadow-sm p-4 h-100 bg-white text-dark">
-        <h4 class="text-success mb-3">🌍 Pago Internacional (PayPal)</h4>
-        <p class="text-muted small mb-4">Paga de forma rápida y segura con tu saldo de PayPal o tarjeta de crédito internacional.</p>
-        
-        <!-- Contenedor del Botón de PayPal -->
-        <div id="paypal-button-container" class="mt-auto"></div>
-    </div>
-</div>
 
-<!-- SDK Oficial de PayPal con tu Client ID completo y limpio -->
-
-
-<script src="https://www.paypal.com/sdk/js?client-id=AVENvr04fvsjtCX1m9875602y2DPDMokkTrVg5yVprbUpPhrrKzozW-ekQfn_prPKCTInrZMP_cZm&currency=USD"></script>
+<!-- SDK y Botón de PayPal Corregido -->
+<script src="https://www.paypal.com/sdk/js?client-id=AVENvr04fvsjtCXiM9875602y2DPMokkTrV5yVprUpPhrrKzozW-ekQfn_cZm&currency=USD"></script>
+<script>
+    paypal.Buttons({
+        createOrder: function(data, actions) {
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: '10.00' // Monto de referencia
+                        value: '5.00' // Monto de referencia
                     }
                 }]
             });
@@ -320,7 +312,7 @@ try {
                 alert('¡Pago exitoso con PayPal! Gracias por tu compra en Nerco Shop.');
             });
         },
-        onCancel: function (data) {
+        onCancel: function(data) {
             alert('Has cancelado el pago.');
         }
     }).render('#paypal-button-container');
