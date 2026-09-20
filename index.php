@@ -353,5 +353,50 @@ try {
     });
 </script>
 
+<!-- INICIO DEL WIDGET DE NERBE -->
+<div id="nerbe-chat-container" style="position: fixed; bottom: 20px; right: 20px; width: 320px; background: #fff; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-family: sans-serif; z-index: 9999;">
+    <div style="background: #111; color: #fff; padding: 12px; border-top-left-radius: 8px; border-top-right-radius: 8px; font-weight: bold;">
+        🤖 Nerbe - Asistente Nerco Valch
+    </div>
+    <div id="nerbe-mensajes" style="height: 250px; overflow-y: auto; padding: 10px; font-size: 14px; background: #f9f9f9;">
+        <div style="margin-bottom: 8px; color: #555;"><b>Nerbe:</b> ¡Hola! Pregúntame lo que necesites sobre franelas, gorras o diseños en Nerco Valch.</div>
+    </div>
+    <div style="border-top: 1px solid #eee; padding: 8px; display: flex;">
+        <input type="text" id="nerbe-input" placeholder="Ej: ¿Cuánto cuesta una franela?" style="flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 4px; outline: none;">
+        <button onclick="enviarAMensajeNerbe()" style="background: #111; color: #fff; border: none; padding: 6px 12px; margin-left: 5px; border-radius: 4px; cursor: pointer;">Enviar</button>
+    </div>
+</div>
+
+<script>
+async function enviarAMensajeNerbe() {
+    let input = document.getElementById('nerbe-input');
+    let contenedor = document.getElementById('nerbe-mensajes');
+    let mensajeTexto = input.value.trim();
+    
+    if(!mensajeTexto) return;
+
+    // Muestra el mensaje que escribiste en la burbuja
+    contenedor.innerHTML += <div style="margin-bottom: 8px; text-align: right;"><b>Tú:</b> ${mensajeTexto}</div>;
+    input.value = '';
+    contenedor.scrollTop = contenedor.scrollHeight;
+
+    try {
+        let respuesta = await fetch('api_nerbe.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ mensaje: mensajeTexto })
+        });
+        let data = await respuesta.json();
+
+        // Muestra la respuesta que devuelve Nerbe
+        contenedor.innerHTML += <div style="margin-bottom: 8px; color: #333;"><b>Nerbe:</b><br>${data.respuesta.replace(/\n/g, '<br>')}</div>;
+        contenedor.scrollTop = contenedor.scrollHeight;
+    } catch (error) {
+        contenedor.innerHTML += <div style="margin-bottom: 8px; color: red;"><b>Error:</b> No pude conectar con el asistente.</div>;
+    }
+}
+</script>
+<!-- FIN DEL WIDGET DE NERBE -->
+
 </body>
 </html>
