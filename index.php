@@ -353,17 +353,27 @@ try {
     });
 </script>
 
-<!-- INICIO DEL WIDGET DE NERBE -->
-<div id="nerbe-chat-container" style="position: fixed; bottom: 20px; right: 20px; width: 320px; background: #fff; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-family: sans-serif; z-index: 9999;">
-    <div style="background: #111; color: #fff; padding: 12px; border-top-left-radius: 8px; border-top-right-radius: 8px; font-weight: bold;">
-        🤖 Nerbe - Asistente Nerco Valch
+<!-- INICIO DEL WIDGET DE NERBE CON AVATAR -->
+<div id="nerbe-chat-container" style="position: fixed; bottom: 20px; right: 20px; width: 320px; background: #fff; border: 1px solid #ccc; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); font-family: sans-serif; z-index: 9999; overflow: hidden;">
+    
+    <!-- Encabezado con tu avatar.jpeg -->
+    <div style="background: #111; color: #fff; padding: 10px 12px; display: flex; align-items: center; font-weight: bold;">
+        <img src="avatar.jpeg" alt="Nerbe" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; margin-right: 10px; border: 1px solid #fff;">
+        <div>
+            <div style="font-size: 14px;">Nerbe</div>
+            <div style="font-size: 10px; color: #aaa; font-weight: normal;">Asistente Nercovalch</div>
+        </div>
     </div>
+
+    <!-- Historial de mensajes -->
     <div id="nerbe-mensajes" style="height: 250px; overflow-y: auto; padding: 10px; font-size: 14px; background: #f9f9f9;">
         <div style="margin-bottom: 8px; color: #555;"><b>Nerbe:</b> ¡Hola! Pregúntame lo que necesites sobre franelas, gorras o diseños en Nerco Valch.</div>
     </div>
-    <div style="border-top: 1px solid #eee; padding: 8px; display: flex;">
-        <input type="text" id="nerbe-input" placeholder="Ej: ¿Cuánto cuesta una franela?" style="flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 4px; outline: none;">
-        <button onclick="enviarAMensajeNerbe()" style="background: #111; color: #fff; border: none; padding: 6px 12px; margin-left: 5px; border-radius: 4px; cursor: pointer;">Enviar</button>
+    
+    <!-- Barra de escritura -->
+    <div style="border-top: 1px solid #eee; padding: 8px; display: flex; background: #fff;">
+        <input type="text" id="nerbe-input" placeholder="Escribe tu consulta..." style="flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 4px; outline: none; font-size: 13px;">
+        <button onclick="enviarAMensajeNerbe()" style="background: #111; color: #fff; border: none; padding: 6px 12px; margin-left: 5px; border-radius: 4px; cursor: pointer; font-weight: bold;">Enviar</button>
     </div>
 </div>
 
@@ -375,7 +385,6 @@ async function enviarAMensajeNerbe() {
     
     if(!mensajeTexto) return;
 
-    // Muestra el mensaje que escribiste en la burbuja
     contenedor.innerHTML += <div style="margin-bottom: 8px; text-align: right;"><b>Tú:</b> ${mensajeTexto}</div>;
     input.value = '';
     contenedor.scrollTop = contenedor.scrollHeight;
@@ -388,7 +397,6 @@ async function enviarAMensajeNerbe() {
         });
         let data = await respuesta.json();
 
-        // Muestra la respuesta que devuelve Nerbe
         contenedor.innerHTML += <div style="margin-bottom: 8px; color: #333;"><b>Nerbe:</b><br>${data.respuesta.replace(/\n/g, '<br>')}</div>;
         contenedor.scrollTop = contenedor.scrollHeight;
     } catch (error) {
