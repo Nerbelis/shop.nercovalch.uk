@@ -302,21 +302,21 @@ try {
 </div>
 
 <!-- SDK y Botón de PayPal Corregido -->
-<script src="https://www.paypal.com/sdk/js?client-id=AVENvr04fvsjtCXiM9875602y2DPMokkTrV5yVprUpPhrrKzozW-ekQfn_cZm&currency=USD"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AVENvr04fvsjtCX1mw9B75602y2DPDWokkTrVg6yVprbupPhrrKzozUw-ekQfn_prUPkCTInrZMP_cZm&currency=USD"></script>
 <script>
     paypal.Buttons({
         createOrder: function(data, actions) {
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: '5.00' // Monto de referencia
+                        value: '5.00'
                     }
                 }]
             });
         },
         onApprove: function(data, actions) {
             return actions.order.capture().then(function(orderData) {
-                alert('¡Pago exitoso con PayPal! Gracias por tu compra en Nerco Shop.');
+                alert('¡Pago exitoso con PayPal! Gracias por tu compra.');
             });
         },
         onCancel: function(data) {
