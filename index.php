@@ -293,6 +293,13 @@ try {
     </div>
 </div>
 <!-- 2. Método de Pago Internacional (PayPal) -->
+<div class="col-md-6">
+    <div class="card shadow-sm p-4 h-100 bg-white text-dark">
+        <h4 class="text-primary mb-3">💳 Pago Internacional (PayPal)</h4>
+        <p class="text-muted small mb-3">Realiza el Pago Internacional con PayPal:</p>
+        <div id="paypal-button-container"></div>
+    </div>
+</div>
 
 <!-- SDK y Botón de PayPal Corregido -->
 <script src="https://www.paypal.com/sdk/js?client-id=AVENvr04fvsjtCXiM9875602y2DPMokkTrV5yVprUpPhrrKzozW-ekQfn_cZm&currency=USD"></script>
