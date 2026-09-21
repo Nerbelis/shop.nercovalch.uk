@@ -353,7 +353,7 @@ try {
     });
 </script>
 <!-- INICIO DEL WIDGET TIPO BURBUJA FLOTANTE - NERBE -->
-<div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: sans-serif;">
+<div style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; font-family: sans-serif;">
     
     <!-- Ventana de Chat (Oculta por defecto) -->
     <div id="nerbe-chat-window" style="display: none; width: 320px; background: #fff; border: 1px solid #ccc; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.25); overflow: hidden; margin-bottom: 15px;">
@@ -367,7 +367,7 @@ try {
                     <div style="font-size: 10px; color: #aaa; font-weight: normal;">Asistente Nerco Valch</div>
                 </div>
             </div>
-            <button onclick="toggleNerbeChat()" style="background: transparent; border: none; color: #fff; font-size: 16px; cursor: pointer;">✕</button>
+            <button type="button" onclick="document.getElementById('nerbe-chat-window').style.display='none';" style="background: transparent; border: none; color: #fff; font-size: 16px; cursor: pointer;">✕</button>
         </div>
 
         <!-- Mensajes -->
@@ -378,27 +378,17 @@ try {
         <!-- Input de texto -->
         <div style="border-top: 1px solid #eee; padding: 8px; display: flex; background: #fff;">
             <input type="text" id="nerbe-input" placeholder="Escribe tu consulta..." style="flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 4px; outline: none; font-size: 13px;" onkeypress="if(event.key === 'Enter') enviarAMensajeNerbe();">
-            <button onclick="enviarAMensajeNerbe()" style="background: #111; color: #fff; border: none; padding: 6px 12px; margin-left: 5px; border-radius: 4px; cursor: pointer; font-weight: bold;">Enviar</button>
+            <button type="button" onclick="enviarAMensajeNerbe()" style="background: #111; color: #fff; border: none; padding: 6px 12px; margin-left: 5px; border-radius: 4px; cursor: pointer; font-weight: bold;">Enviar</button>
         </div>
     </div>
 
     <!-- Botón Circular Flotante (La Burbuja con tu Avatar) -->
-    <button onclick="toggleNerbeChat()" style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid #fff; background: #111; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); padding: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-        <img src="avatar.jpeg" alt="Abrir Chat Nerbe" style="width: 100%; height: 100%; object-fit: cover;">
+    <button type="button" onclick="let w = document.getElementById('nerbe-chat-window'); w.style.display = (w.style.display === 'none' || w.style.display === '') ? 'block' : 'none';" style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid #fff; background: #111; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); padding: 0; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+        <img src="avatar.jpeg" alt="Abrir Chat Nerbe" style="width: 100%; height: 100%; object-fit: pointer; pointer-events: none;">
     </button>
 </div>
 
 <script>
-function toggleNerbeChat() {
-    let ventana = document.getElementById('nerbe-chat-window');
-    if (ventana.style.display === 'none' || ventana.style.display === '') {
-        ventana.style.display = 'block';
-        document.getElementById('nerbe-input').focus();
-    } else {
-        ventana.style.display = 'none';
-    }
-}
-
 async function enviarAMensajeNerbe() {
     let input = document.getElementById('nerbe-input');
     let contenedor = document.getElementById('nerbe-mensajes');
