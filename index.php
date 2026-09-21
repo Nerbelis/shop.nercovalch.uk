@@ -372,19 +372,22 @@ try {
 
         <!-- Mensajes -->
         <div id="nerbe-mensajes" style="height: 240px; overflow-y: auto; padding: 10px; font-size: 13px; background: #f9f9f9;">
-            <div style="margin-bottom: 8px; color: #555;"><b>Nerbe:</b> ¡Hola! Pregúntame lo que necesites sobre franelas, gorras o diseños en Nerco Valch.</div>
+            <div style="margin-bottom: 8px; color: #555;"><b>Nerbe:</b> ¡Hola! Escríbeme tu duda o si prefieres atención directa, pulsa abajo para hablar al WhatsApp.</div>
         </div>
         
         <!-- Input de texto -->
-        <div style="border-top: 1px solid #eee; padding: 8px; display: flex; background: #fff;">
-            <input type="text" id="nerbe-input" placeholder="Escribe tu consulta..." style="flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 4px; outline: none; font-size: 13px;" onkeypress="if(event.key === 'Enter') enviarAMensajeNerbe();">
-            <button type="button" onclick="enviarAMensajeNerbe()" style="background: #111; color: #fff; border: none; padding: 6px 12px; margin-left: 5px; border-radius: 4px; cursor: pointer; font-weight: bold;">Enviar</button>
+        <div style="border-top: 1px solid #eee; padding: 8px; display: flex; background: #fff; flex-direction: column; gap: 6px;">
+            <div style="display: flex;">
+                <input type="text" id="nerbe-input" placeholder="Escribe tu consulta..." style="flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 4px; outline: none; font-size: 13px;" onkeypress="if(event.key === 'Enter') enviarAMensajeNerbe();">
+                <button type="button" onclick="enviarAMensajeNerbe()" style="background: #111; color: #fff; border: none; padding: 6px 12px; margin-left: 5px; border-radius: 4px; cursor: pointer; font-weight: bold;">Enviar</button>
+            </div>
+            <a href="https://wa.me/584126526413?text=Hola,%20vengo%20de%20Nerco%20Valch%20y%20tengo%20una%20consulta." target="_blank" style="text-align: center; background: #25D366; color: #fff; padding: 6px; border-radius: 4px; font-size: 12px; text-decoration: none; font-weight: bold;">💬 Consultar por WhatsApp directo</a>
         </div>
     </div>
 
     <!-- Botón Circular Flotante (La Burbuja con tu Avatar) -->
     <button type="button" onclick="let w = document.getElementById('nerbe-chat-window'); w.style.display = (w.style.display === 'none' || w.style.display === '') ? 'block' : 'none';" style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid #fff; background: #111; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); padding: 0; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-        <img src="avatar.jpeg" alt="Abrir Chat Nerbe" style="width: 100%; height: 100%; object-fit: pointer; pointer-events: none;">
+        <img src="avatar.jpeg" alt="Abrir Chat Nerbe" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
     </button>
 </div>
 
@@ -411,7 +414,8 @@ async function enviarAMensajeNerbe() {
         contenedor.innerHTML += <div style="margin-bottom: 8px; color: #333;"><b>Nerbe:</b><br>${data.respuesta.replace(/\n/g, '<br>')}</div>;
         contenedor.scrollTop = contenedor.scrollHeight;
     } catch (error) {
-        contenedor.innerHTML += <div style="margin-bottom: 8px; color: red;"><b>Error:</b> No pude conectar con el asistente.</div>;
+        contenedor.innerHTML += <div style="margin-bottom: 8px; color: #c0392b;"><b>Nerbe:</b> Para darte una respuesta inmediata, por favor escríbeme directo a mi WhatsApp haciendo clic en el botón verde de abajo. 👇</div>;
+        contenedor.scrollTop = contenedor.scrollHeight;
     }
 }
 </script>
