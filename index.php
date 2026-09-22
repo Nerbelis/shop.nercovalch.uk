@@ -375,51 +375,62 @@ try {
             <div style="margin-bottom: 8px; color: #555;"><b>Nerbe:</b> ¡Hola! Escríbeme tu duda o si prefieres atención directa, pulsa abajo para hablar al WhatsApp.</div>
         </div>
         
-        <!-- Input de texto -->
+        <!-- Input de texto y botón de enviar -->
 <div style="border-top: 1px solid #eee; padding: 8px; display: flex; background: #fff; gap: 6px; align-items: center;">
-    <input type="text" id="nerbe-input" placeholder="Escribe tu consulta..." style="flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 4px; outline: none; font-size: 13px;" onkeypress="if(event.key === 'Enter') enviarAMensajeNerbe()">
-    <button type="button" onclick="enviarAMensajeNerbe()" style="background: #25D366; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold;">Enviar</button>
+    <input type="text" id="nerbe-input" placeholder="Escribe tu consulta..." style="flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 4px; outline: none; font-size: 13px;">
+    <button type="button" id="btn-enviar-nerbe" style="background: #25D366; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold;">Enviar</button>
 </div>
 
 </div> <!-- Cierre de la ventana del chat -->
 
-<!-- Botón Circular Flotante (La Burbuja con tu Avatar) -->
-<button type="button" onclick="let w = document.getElementById('nerbe-chat-window'); w.style.display = (w.style.display === 'none' || w.style.display === '') ? 'block' : 'none';" style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border-radius: 50%; border: 2px solid #fff; background: #111; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.25); overflow: hidden; z-index: 99999;">
-    <img src="avatar.jpeg" alt="Abrir Chat Nerbe" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
-</button>
-
+<!-- Script corregido para asegurar el funcionamiento -->
 <script>
-function enviarAMensajeNerbe() {
-    let input = document.getElementById('nerbe-input');
-    let contenedor = document.getElementById('nerbe-mensajes');
-    let mensajeTexto = input.value.trim();
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById('nerbe-input');
+    const boton = document.getElementById('btn-enviar-nerbe');
+    const contenedor = document.getElementById('nerbe-mensajes');
+
+    function procesarEnvio() {
+        if (!input || !contenedor) return;
+        let mensajeTexto = input.value.trim();
+        if (!mensajeTexto) return;
+
+        // Agregar mensaje del usuario al chat
+        contenedor.innerHTML += '<div style="margin-bottom: 8px; text-align: right;"><b>Tú:</b> ' + mensajeTexto + '</div>';
+        input.value = '';
+        contenedor.scrollTop = contenedor.scrollHeight;
+
+        // Petición a la API
+        fetch('api_nerbe.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ mensaje: mensajeTexto })
+        })
+        .then(response => response.json())
+        .then(data => {
+            let respuestaFormateada = data.respuesta.replace(/\n/g, '<br>');
+            contenedor.innerHTML += '<div style="margin-bottom: 8px; color: #333;"><b>Nerbe:</b><br>' + respuestaFormateada + '</div>';
+            contenedor.scrollTop = contenedor.scrollHeight;
+        })
+        .catch(error => {
+            contenedor.innerHTML += '<div style="margin-bottom: 8px; color: #c0392b;"><b>Nerbe:</b> Escríbeme directo al botón de WhatsApp de abajo para atenderte al instante. 👇</div>';
+            contenedor.scrollTop = contenedor.scrollHeight;
+        });
+    }
+
+    if (boton) {
+        boton.addEventListener('click', procesarEnvio);
+    }
     
-    if(!mensajeTexto) return;
-
-    contenedor.innerHTML += '<div style="margin-bottom: 8px; text-align: right;"><b>Tú:</b> ' + mensajeTexto + '</div>';
-    input.value = '';
-    contenedor.scrollTop = contenedor.scrollHeight;
-
-    fetch('api_nerbe.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mensaje: mensajeTexto })
-    })
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(data) {
-        let respuestaFormateada = data.respuesta.replace(/\n/g, '<br>');
-        contenedor.innerHTML += '<div style="margin-bottom: 8px; color: #333;"><b>Nerbe:</b><br>' + respuestaFormateada + '</div>';
-        contenedor.scrollTop = contenedor.scrollHeight;
-    })
-    .catch(function(error) {
-        contenedor.innerHTML += '<div style="margin-bottom: 8px; color: #c0392b;"><b>Nerbe:</b> Para una respuesta inmediata, por favor escríbeme directo a mi WhatsApp haciendo clic en el botón verde de abajo. 👇</div>';
-        contenedor.scrollTop = contenedor.scrollHeight;
-    });
-}
+    if (input) {
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                procesarEnvio();
+            }
+        });
+    }
+});
 </script>
-<!-- FIN DEL WIDGET TIPO BURBUJA FLOTANTE -->
 
 </body>
 </html>
