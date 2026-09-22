@@ -376,47 +376,47 @@ try {
         </div>
         
         <!-- Input de texto -->
-        <div style="border-top: 1px solid #eee; padding: 8px; display: flex; background: #fff; flex-direction: column; gap: 6px;">
-            <div style="display: flex;">
-                <input type="text" id="nerbe-input" placeholder="Escribe tu consulta..." style="flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 4px; outline: none; font-size: 13px;" onkeypress="if(event.key === 'Enter') enviarAMensajeNerbe();">
-                <button type="button" onclick="enviarAMensajeNerbe()" style="background: #111; color: #fff; border: none; padding: 6px 12px; margin-left: 5px; border-radius: 4px; cursor: pointer; font-weight: bold;">Enviar</button>
-            </div>
-            <a href="https://wa.me/584126526413?text=Hola,%20vengo%20de%20Nerco%20Valch%20y%20tengo%20una%20consulta." target="_blank" style="text-align: center; background: #25D366; color: #fff; padding: 6px; border-radius: 4px; font-size: 12px; text-decoration: none; font-weight: bold;">💬 Consultar por WhatsApp directo</a>
-        </div>
-    </div>
-
-    <!-- Botón Circular Flotante (La Burbuja con tu Avatar) -->
-    <button type="button" onclick="let w = document.getElementById('nerbe-chat-window'); w.style.display = (w.style.display === 'none' || w.style.display === '') ? 'block' : 'none';" style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid #fff; background: #111; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); padding: 0; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-        <img src="avatar.jpeg" alt="Abrir Chat Nerbe" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
-    </button>
+<div style="border-top: 1px solid #eee; padding: 8px; display: flex; background: #fff; gap: 6px; align-items: center;">
+    <input type="text" id="nerbe-input" placeholder="Escribe tu consulta..." style="flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 4px; outline: none; font-size: 13px;" onkeypress="if(event.key === 'Enter') enviarAMensajeNerbe()">
+    <button type="button" onclick="enviarAMensajeNerbe()" style="background: #25D366; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold;">Enviar</button>
 </div>
 
+</div> <!-- Cierre de la ventana del chat -->
+
+<!-- Botón Circular Flotante (La Burbuja con tu Avatar) -->
+<button type="button" onclick="let w = document.getElementById('nerbe-chat-window'); w.style.display = (w.style.display === 'none' || w.style.display === '') ? 'block' : 'none';" style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border-radius: 50%; border: 2px solid #fff; background: #111; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.25); overflow: hidden; z-index: 99999;">
+    <img src="avatar.jpeg" alt="Abrir Chat Nerbe" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+</button>
+
 <script>
-async function enviarAMensajeNerbe() {
+function enviarAMensajeNerbe() {
     let input = document.getElementById('nerbe-input');
     let contenedor = document.getElementById('nerbe-mensajes');
     let mensajeTexto = input.value.trim();
     
     if(!mensajeTexto) return;
 
-    contenedor.innerHTML += <div style="margin-bottom: 8px; text-align: right;"><b>Tú:</b> ${mensajeTexto}</div>;
+    contenedor.innerHTML += '<div style="margin-bottom: 8px; text-align: right;"><b>Tú:</b> ' + mensajeTexto + '</div>';
     input.value = '';
     contenedor.scrollTop = contenedor.scrollHeight;
 
-    try {
-        let respuesta = await fetch('api_nerbe.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ mensaje: mensajeTexto })
-        });
-        let data = await respuesta.json();
-
-        contenedor.innerHTML += <div style="margin-bottom: 8px; color: #333;"><b>Nerbe:</b><br>${data.respuesta.replace(/\n/g, '<br>')}</div>;
+    fetch('api_nerbe.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mensaje: mensajeTexto })
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        let respuestaFormateada = data.respuesta.replace(/\n/g, '<br>');
+        contenedor.innerHTML += '<div style="margin-bottom: 8px; color: #333;"><b>Nerbe:</b><br>' + respuestaFormateada + '</div>';
         contenedor.scrollTop = contenedor.scrollHeight;
-    } catch (error) {
-        contenedor.innerHTML += <div style="margin-bottom: 8px; color: #c0392b;"><b>Nerbe:</b> Para darte una respuesta inmediata, por favor escríbeme directo a mi WhatsApp haciendo clic en el botón verde de abajo. 👇</div>;
+    })
+    .catch(function(error) {
+        contenedor.innerHTML += '<div style="margin-bottom: 8px; color: #c0392b;"><b>Nerbe:</b> Para una respuesta inmediata, por favor escríbeme directo a mi WhatsApp haciendo clic en el botón verde de abajo. 👇</div>';
         contenedor.scrollTop = contenedor.scrollHeight;
-    }
+    });
 }
 </script>
 <!-- FIN DEL WIDGET TIPO BURBUJA FLOTANTE -->
