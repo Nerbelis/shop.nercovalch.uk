@@ -380,6 +380,8 @@ try {
 <script>
 async function enviarMensajeNerbe(event) {
     event.preventDefault(); // Evita que la página se recargue
+    // PRUEBA: Si esto sale en pantalla, el botón funciona perfecto
+    alert("¡El botón disparó la función!");
     
     let input = document.getElementById('nerbe-input');
     let contenedor = document.getElementById('nerbe-mensajes');
