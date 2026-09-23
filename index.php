@@ -336,7 +336,7 @@ try {
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
  
-   <!-- INICIO DEL WIDGET TIPO BURBUJA FLOTANTE - NERBE -->
+  <!-- INICIO DEL WIDGET TIPO BURBUJA FLOTANTE - NERBE -->
 <div style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; font-family: sans-serif;">
     
     <!-- Ventana de Chat (Oculta por defecto) -->
@@ -348,7 +348,7 @@ try {
                 <img src="avatar.jpeg" alt="Nerbe" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-right: 8px; border: 1px solid #fff;">
                 <div>
                     <div style="font-size: 14px;">Nerbe</div>
-                    <div style="font-size: 10px; color: #aaa; font-weight: normal;">Asistente Nerco Valch</div>
+                    <div style="font-size: 10px; color: #aaa; font-weight: normal;">Asistente Nercovalch</div>
                 </div>
             </div>
             <button type="button" onclick="document.getElementById('nerbe-chat-window').style.display='none';" style="background: transparent; border: none; color: #fff; font-size: 16px; cursor: pointer;">✕</button>
@@ -380,8 +380,6 @@ try {
 <script>
 async function enviarMensajeNerbe(event) {
     event.preventDefault(); // Evita que la página se recargue
-    // PRUEBA: Si esto sale en pantalla, el botón funciona perfecto
-    alert("¡El botón disparó la función!");
     
     let input = document.getElementById('nerbe-input');
     let contenedor = document.getElementById('nerbe-mensajes');
@@ -412,7 +410,6 @@ async function enviarMensajeNerbe(event) {
 }
 </script>
 <!-- FIN DEL WIDGET TIPO BURBUJA FLOTANTE -->
-
 
 </body>
 </html>
