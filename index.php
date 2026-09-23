@@ -334,9 +334,9 @@ try {
     </footer>
 
     <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
- 
-  <!-- INICIO DEL WIDGET TIPO BURBUJA FLOTANTE - NERBE -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- INICIO DEL WIDGET TIPO BURBUJA FLOTANTE - NERBE -->
 <div style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; font-family: sans-serif;">
     
     <!-- Ventana de Chat (Oculta por defecto) -->
@@ -359,15 +359,15 @@ try {
             <div style="margin-bottom: 8px; color: #555;"><b>Nerbe:</b> ¡Hola! Escríbeme tu duda o consulta sobre nuestros productos.</div>
         </div>
         
-        <!-- Formulario de Envío Nativo -->
-        <form id="nerbe-form" onsubmit="enviarMensajeNerbe(event)" style="border-top: 1px solid #eee; padding: 8px; display: flex; background: #fff; gap: 6px; align-items: center; margin: 0;">
+        <!-- Contenedor de Envío Directo por onclick -->
+        <div style="border-top: 1px solid #eee; padding: 8px; display: flex; background: #fff; gap: 6px; align-items: center;">
             <input type="text" id="nerbe-input" placeholder="Escribe tu consulta..." style="flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 4px; outline: none; font-size: 13px;">
-            <button type="submit" style="background: #111; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold;">Enviar</button>
-        </form>
+            <button type="button" onclick="enviarMensajeDirectoNerbe()" style="background: #111; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold;">Enviar</button>
+        </div>
         
-        <!-- Botón de WhatsApp de Respaldo Conservado -->
+        <!-- Botón de WhatsApp de Respaldo -->
         <div style="padding: 0 8px 8px 8px; background: #fff;">
-            <a href="https://wa.me/584126526413?text=Hola,%20vengo%20de%20Nerco%20Valch%20y%20tengo%20una%20consulta." target="_blank" style="display: block; text-align: center; background: #25D366; color: #fff; padding: 6px; border-radius: 4px; font-size: 11px; text-decoration: none; font-weight: bold;">💬 Consultar por WhatsApp directo</a>
+            <a href="https://wa.me/584126526413?text=Hola,%20vengo%20de%20Nercovalch%20y%20tengo%20una%20consulta." target="_blank" style="display: block; text-align: center; background: #25D366; color: #fff; padding: 6px; border-radius: 4px; font-size: 11px; text-decoration: none; font-weight: bold;">💬 Consultar por WhatsApp directo</a>
         </div>
     </div>
 
@@ -377,17 +377,16 @@ try {
     </button>
 </div>
 
+<!-- Script Directo Blindado -->
 <script>
-async function enviarMensajeNerbe(event) {
-    event.preventDefault(); // Evita que la página se recargue
-    
+async function enviarMensajeDirectoNerbe() {
     let input = document.getElementById('nerbe-input');
     let contenedor = document.getElementById('nerbe-mensajes');
     let mensajeTexto = input.value.trim();
     
     if(!mensajeTexto) return;
 
-    // Muestra tu mensaje en pantalla
+    // Muestra tu mensaje en pantalla de inmediato
     contenedor.innerHTML += '<div style="margin-bottom: 8px; text-align: right;"><b>Tú:</b> ' + mensajeTexto + '</div>';
     input.value = '';
     contenedor.scrollTop = contenedor.scrollHeight;
@@ -411,5 +410,7 @@ async function enviarMensajeNerbe(event) {
 </script>
 <!-- FIN DEL WIDGET TIPO BURBUJA FLOTANTE -->
 
+ 
+  
 </body>
 </html>
