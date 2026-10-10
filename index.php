@@ -255,44 +255,11 @@ try {
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://shop.nercovalch.uk" alt="QR Código Tienda Nerco Shop" class="img-thumbnail shadow-sm" style="width: 150px; height: 150px;">
     </div>
 </section>
-<!-- Sección de Pago Móvil Local (Venezuela) con múltiples bancos -->
-<div class="col-md-6">
-    <div class="card shadow-sm p-4 h-100 bg-white text-dark">
-        <h4 class="text-primary mb-3">💳 Pago Móvil (Maracaibo)</h4>
-        <p class="text-muted small mb-3">Selecciona el banco de tu preferencia para realizar el Pago Móvil:</p>
-        
-        <!-- Lista de Bancos Disponibles -->
-        <div class="mb-3">
-            <label for="bancoSelect" class="form-label fw-bold small">Banco Destino:</label>
-            <select id="bancoSelect" class="form-select form-select-sm mb-2">
-                <option value="mercantil">Mercantil (0105)</option>
-                <option value="bfc">BFC - Fondo Común (0151)</option>
-                <option value="bnc">BNC Nacional de Crédito (0191)</option>
-                <option value="venezuela">Banco de Venezuela (0102)</option>
-                <option value="bancaribe">Bancaribe (0114)</option>
-                <option value="banesco">Banesco (0134)</option>
-            </select>
-        </div>
 
-        <div class="bg-light p-3 rounded mb-3 small">
-            <p class="mb-1"><strong>Teléfono:</strong> 0424-6163113</p>
-            <p class="mb-0"><strong>Cédula:</strong> V-11282487</p>
-        </div>
-        
-        <hr>
-        <h5 class="text-center mb-3 fs-6">Escanea el QR para tu Pago Móvil</h5>
-        <div class="text-center mb-3">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150&data=P2P|0424-6163113|V11282487|10.00" alt="QR Pago Móvil" class="img-thumbnail" style="width: 150px; height: 150px;">
-        </div>
-        
-        <div class="mb-3">
-            <label class="form-label fw-bold small">Número de Referencia:</label>
-            <input type="text" name="referencia_pago" class="form-control form-control-sm" placeholder="Últimos dígitos del pago">
-            <small class="text-muted">Válido para delivery al día siguiente en Maracaibo.</small>
-        </div>
-    </div>
-</div>
-<!-- 2. Método de Pago Internacional (PayPal) -->
+<!-- Sección de Métodos de Pago y Checkout (Alineados lado a lado a la misma altura) -->
+<section class="container my-5" id="metodos-pago">
+    <div class="row g-4 align-items-stretch">
+<!-- 1. Método de Pago Internacional (PayPal) -->
 <div class="col-md-6">
     <div class="card shadow-sm p-4 h-100 bg-white text-dark">
         <h4 class="text-primary mb-3">💳 Pago Internacional (PayPal)</h4>
@@ -325,13 +292,71 @@ try {
     }).render('#paypal-button-container');
 </script>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-4 mt-5">
-        <div class="container">
-            <p class="mb-1">&copy; 2026 Nerco Shop (shop.nercovalch.uk). Todos los derechos reservados.</p>
-            <small class="text-muted">Infraestructura respaldada en DigitalOcean y optimizada con Cloudflare.</small>
+        
+        <!-- 2. Columna Izquierda: Pago Móvil (Formulario con Telegram) -->
+        <div class="col-md-6">
+            <form action="procesar_pago.php" method="POST" enctype="multipart/form-data" class="card shadow-sm p-4 h-100 bg-white text-dark">
+                <h4 class="text-primary mb-3">💳 Pago Móvil (Maracaibo)</h4>
+                <p class="text-muted small mb-3">Selecciona tu banco de destino:</p>
+                
+                <!-- Selector de Múltiples Bancos -->
+                <div class="mb-3">
+                    <label for="bancoSelect" class="form-label fw-bold small">Banco Destino:</label>
+                    <select id="bancoSelect" name="banco" class="form-select form-select-sm mb-2">
+                        <option value="Mercantil">Mercantil (0105)</option>
+                        <option value="BFC">BFC - Fondo Común (0151)</option>
+                        <option value="BNC">BNC Nacional de Crédito (0191)</option>
+                        <option value="Venezuela">Banco de Venezuela (0102)</option>
+                        <option value="Bancaribe">Bancaribe (0114)</option>
+                        <option value="Banesco">Banesco (0134)</option>
+                    </select>
+                </div>
+
+                <div class="bg-light p-3 rounded mb-3 small">
+                    <p class="mb-1"><strong>Teléfono:</strong> 0424-6163113</p>
+                    <p class="mb-0"><strong>Cédula / RIF:</strong> V-11282487</p>
+                </div>
+                
+                <hr>
+                <h5 class="text-center mb-3 fs-6">Escanea el QR para tu Pago Móvil</h5>
+                <div class="text-center mb-3">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150&data=P2P|04246163113|V11282487|10.00" alt="QR Pago Móvil" class="img-thumbnail" style="width: 150px; height: 150px;">
+                </div>
+                
+                <!-- Datos del cliente para Telegram -->
+                <div class="mb-2">
+                    <input type="text" name="nombre" class="form-control form-control-sm" placeholder="Tu Nombre y Apellido" required>
+                </div>
+                <div class="mb-2">
+                    <input type="text" name="telefono" class="form-control form-control-sm" placeholder="Tu Teléfono" required>
+                </div>
+                <div class="mb-2">
+                    <input type="text" name="direccion" class="form-control form-control-sm" placeholder="Dirección de Delivery en Maracaibo" required>
+                </div>
+
+                <div class="mb-2">
+                    <input type="text" name="referencia_pago" class="form-control form-control-sm" placeholder="Número de Referencia del Pago" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold small text-muted">Adjuntar Capture del Pago:</label>
+                    <input type="file" name="capture" class="form-control form-control-sm" accept="image/*" required>
+                </div>
+
+                <button type="submit" class="btn btn-dark w-100 fw-bold">Enviar Comprobante y Registrar</button>
+            </form>
         </div>
-    </footer>
+
+</script>
+    <!-- Footer -->
+    <!-- Footer Personalizado para Portafolio -->
+<footer class="bg-dark text-white text-center py-4 mt-5">
+    <div class="container">
+        <p class="mb-1">&copy; 2026 Nerco Shop (shop.nercovalch.uk). Todos los derechos reservados.</p>
+        <p class="mb-1 text-info fw-semibold">Elaborado por la Ingeniera Civil e Informática: Nerbelis Valdeblanques CIV 310409 (nercovalch)</p>
+        <small class="text-muted">Proyecto de portafolio profesional - Soluciones web y pasarelas de pago automatizadas.</small>
+    </div>
+</footer>
 
     <!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
