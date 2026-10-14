@@ -356,7 +356,7 @@ try {
         <p class="mb-1 text-info fw-semibold">Elaborado por la Ingeniera Civil e Informática: Nerbelis Valdeblanques CIV 310409 (nercovalch)</p>
         <small class="text-muted">Proyecto de portafolio profesional - Soluciones web y pasarelas de pago automatizadas.</small>
         <p style="margin-top: 10px;">
-        <a href="https://nercovalch.uk/politica_privacidad.html" target="_blank" style="color: inherit; text-decoration: underline;">Política de Privacidad</a>
+        <a href="politica_privacidad.html" target="_blank" style="color: inherit;">Política de Privacidad</a>
         </p>
     </div>
 </footer>
